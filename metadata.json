@@ -1,0 +1,5 @@
+{
+  "name": "SmartTerminal",
+  "description": "Интеллектуальная операционная система терминала (SmartTerminal) для управления логистикой, складом, ЖД-операциями и автовизитами.",
+  "requestFramePermissions": []
+}
