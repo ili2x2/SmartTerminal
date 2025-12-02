@@ -7,8 +7,8 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     define: {
-      // This ensures your existing process.env.API_KEY code works in Vite
-      'process.env.API_KEY': JSON.stringify(env.API_KEY)
+      // Use fallback to empty string to prevent build errors if key is missing
+      'process.env.API_KEY': JSON.stringify(env.API_KEY || '')
     },
     server: {
       port: 3000

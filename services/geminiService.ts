@@ -4,7 +4,13 @@ import {
   Train, OperationTask, GateEntry, WarehouseItem, ClientOrder 
 } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Helper function to initialize AI only when needed
+const getAIClient = () => {
+  // If API_KEY is missing, we use a placeholder to prevent constructor crash, 
+  // but the actual API call will fail gracefully in the try/catch block.
+  const apiKey = process.env.API_KEY || 'MISSING_KEY'; 
+  return new GoogleGenAI({ apiKey });
+};
 
 interface FullTerminalState {
   containers: Container[];
@@ -22,6 +28,8 @@ export const analyzeTerminalState = async (
   state: FullTerminalState
 ): Promise<string> => {
   try {
+    const ai = getAIClient();
+    
     const context = `
       Вы — ИИ-операционный директор системы GTS-2 (Global Terminal System).
       Ваша задача: управление мультимодальным терминалом (ЖД, Авто, Склад).
@@ -62,12 +70,14 @@ export const analyzeTerminalState = async (
     return response.text || "Данные приняты, но текстовый ответ не сгенерирован.";
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "Система GTS-2 временно недоступна для когнитивного анализа. Проверьте соединение с сервером.";
+    return "Система GTS-2 временно недоступна для когнитивного анализа. Проверьте API ключ или соединение.";
   }
 };
 
 export const generateOperationalTasks = async (train: Train): Promise<OperationTask[]> => {
   try {
+    const ai = getAIClient();
+
     const prompt = `
       Act as the Terminal Operating System (TOS) AI Engine.
       Generate 3 to 5 realistic operational tasks (OperationTask) for handling the train: ${train.number}.
