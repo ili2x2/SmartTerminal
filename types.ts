@@ -1,3 +1,4 @@
+
 export enum ContainerStatus {
   IN_YARD = 'IN_YARD',
   ON_VESSEL = 'ON_VESSEL',
@@ -110,4 +111,22 @@ export interface ClientOrder {
   status: 'DRAFT' | 'SUBMITTED' | 'APPROVED' | 'COMPLETED';
   date: string;
   volume: string; // e.g. "5 Containers"
+}
+
+export interface SecurityCamera {
+  id: string;
+  name: string;
+  zone: string;
+  status: 'ONLINE' | 'OFFLINE' | 'RECORDING' | 'ALERT';
+  type: 'PTZ' | 'STATIC' | 'THERMAL';
+  lastActivity?: string;
+}
+
+export interface SecurityIncident {
+  id: string;
+  type: 'MOTION' | 'ACCESS_DENIED' | 'UNAUTHORIZED_OBJECT' | 'SYSTEM_FAULT';
+  location: string;
+  timestamp: string;
+  status: 'NEW' | 'INVESTIGATING' | 'RESOLVED';
+  cameraId: string;
 }

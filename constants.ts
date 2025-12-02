@@ -1,6 +1,8 @@
+
 import { 
   Container, ContainerStatus, ContainerType, ZoneData, SystemAlert,
-  Train, OperationTask, GateEntry, WarehouseItem, ClientOrder 
+  Train, OperationTask, GateEntry, WarehouseItem, ClientOrder,
+  SecurityCamera, SecurityIncident
 } from './types';
 
 // --- Containers ---
@@ -79,4 +81,23 @@ export const MOCK_ORDERS: ClientOrder[] = [
   { id: 'o1', clientName: 'Global Trade LLP', type: 'IMPORT', status: 'APPROVED', date: '2023-11-01', volume: '12 Containers' },
   { id: 'o2', clientName: 'Sino-Kazakh Logistics', type: 'TRANSIT', status: 'SUBMITTED', date: '2023-11-01', volume: '1 Train Set' },
   { id: 'o3', clientName: 'AgroExport', type: 'EXPORT', status: 'DRAFT', date: '2023-11-02', volume: '5 Containers' },
+];
+
+// --- Security Cameras ---
+export const MOCK_CAMERAS: SecurityCamera[] = [
+  { id: 'cam-01', name: 'КПП Главный Въезд', zone: 'GATE', status: 'RECORDING', type: 'PTZ', lastActivity: 'Движение 2 мин назад' },
+  { id: 'cam-02', name: 'Периметр Север', zone: 'PERIMETER', status: 'ONLINE', type: 'STATIC' },
+  { id: 'cam-03', name: 'Ж/Д Фронт Путь 1', zone: 'RAIL', status: 'RECORDING', type: 'PTZ' },
+  { id: 'cam-04', name: 'Склад LCL (Внутр)', zone: 'WAREHOUSE', status: 'ONLINE', type: 'STATIC' },
+  { id: 'cam-05', name: 'Зона Хранения A', zone: 'YARD', status: 'RECORDING', type: 'PTZ', lastActivity: 'Крановая операция' },
+  { id: 'cam-06', name: 'Зона Хранения Hazmat', zone: 'YARD', status: 'ALERT', type: 'THERMAL', lastActivity: 'Высокая темп.' },
+  { id: 'cam-07', name: 'Администрация Вход', zone: 'OFFICE', status: 'ONLINE', type: 'STATIC' },
+  { id: 'cam-08', name: 'Периметр Юг', zone: 'PERIMETER', status: 'OFFLINE', type: 'STATIC' },
+];
+
+// --- Security Incidents ---
+export const MOCK_INCIDENTS: SecurityIncident[] = [
+  { id: 'inc-01', type: 'MOTION', location: 'Сектор C (Hazmat)', timestamp: '10:42', status: 'NEW', cameraId: 'cam-06' },
+  { id: 'inc-02', type: 'ACCESS_DENIED', location: 'КПП-2 Служебный', timestamp: '09:15', status: 'RESOLVED', cameraId: 'cam-01' },
+  { id: 'inc-03', type: 'SYSTEM_FAULT', location: 'Серверная 2', timestamp: '08:00', status: 'INVESTIGATING', cameraId: 'sys' },
 ];

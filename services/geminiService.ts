@@ -1,4 +1,4 @@
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, Type } from "@google/genai";
 import { 
   Container, ZoneData, SystemAlert, 
   Train, OperationTask, GateEntry, WarehouseItem, ClientOrder 
@@ -63,5 +63,63 @@ export const analyzeTerminalState = async (
   } catch (error) {
     console.error("Gemini API Error:", error);
     return "Система GTS-2 временно недоступна для когнитивного анализа. Проверьте соединение с сервером.";
+  }
+};
+
+export const generateOperationalTasks = async (train: Train): Promise<OperationTask[]> => {
+  try {
+    const prompt = `
+      Act as the Terminal Operating System (TOS) AI Engine.
+      Generate 3 to 5 realistic operational tasks (OperationTask) for handling the train: ${train.number}.
+      
+      Train Context:
+      - Direction: ${train.direction}
+      - Cargo Type: ${train.cargoType}
+      - Wagons: ${train.wagonCount}
+      
+      Requirements:
+      1. Tasks must be technically accurate for a container terminal (UNLOAD, MOVE, INSPECT).
+      2. Use realistic equipment IDs (e.g., 'RMG-02', 'RTG-05', 'RS-01') or roles ('Tallyman', 'Customs Officer').
+      3. Task descriptions must be in RUSSIAN language, concise and professional.
+      4. Assign priorities based on cargo (e.g., Electronics/Reefer = HIGH).
+      
+      Output JSON only matching the schema.
+    `;
+
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: prompt,
+      config: {
+        responseMimeType: 'application/json',
+        responseSchema: {
+          type: Type.ARRAY,
+          items: {
+            type: Type.OBJECT,
+            properties: {
+              type: { type: Type.STRING, enum: ['LOAD', 'UNLOAD', 'MOVE', 'INSPECT'] },
+              priority: { type: Type.STRING, enum: ['HIGH', 'NORMAL', 'LOW'] },
+              status: { type: Type.STRING, enum: ['PENDING', 'IN_PROGRESS', 'COMPLETED'] },
+              assignedTo: { type: Type.STRING },
+              targetId: { type: Type.STRING },
+              description: { type: Type.STRING },
+            },
+            required: ['type', 'priority', 'status', 'assignedTo', 'targetId', 'description'],
+          },
+        },
+      },
+    });
+
+    const rawTasks = JSON.parse(response.text || "[]");
+    
+    // Enrich with client-side fields
+    return rawTasks.map((t: any, i: number) => ({
+      ...t,
+      id: `ai-task-${Date.now()}-${i}`,
+      timestamp: new Date().toLocaleTimeString('ru-RU', {hour: '2-digit', minute:'2-digit'})
+    }));
+
+  } catch (error) {
+    console.error("AI Task Generation Failed:", error);
+    return [];
   }
 };

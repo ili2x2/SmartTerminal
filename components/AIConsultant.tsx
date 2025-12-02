@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { Bot, Send, User, Sparkles, Loader2, Info } from 'lucide-react';
 import { ChatMessage, Container, ZoneData, SystemAlert } from '../types';
@@ -46,7 +47,6 @@ const AIConsultant: React.FC<Props> = ({ containers, zones, alerts }) => {
 
     try {
       // Aggregate full state for the AI
-      // In a real app, this would be fetched from the backend dynamically
       const fullState = {
         containers,
         zones,
@@ -91,39 +91,39 @@ const AIConsultant: React.FC<Props> = ({ containers, zones, alerts }) => {
     <div className="h-[calc(100vh-8rem)] flex flex-col lg:flex-row gap-6 animate-in fade-in duration-500">
       
       {/* Chat Interface */}
-      <div className="flex-1 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl flex flex-col shadow-2xl overflow-hidden relative">
-        <div className="p-4 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 flex justify-between items-center backdrop-blur-sm z-10">
+      <div className="flex-1 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl flex flex-col shadow-2xl overflow-hidden relative">
+        <div className="p-4 border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex justify-between items-center backdrop-blur-sm z-10">
           <div className="flex items-center gap-3">
             <div className="p-2 bg-gradient-to-tr from-purple-600 to-blue-600 rounded-lg shadow-lg shadow-purple-500/30 dark:shadow-purple-900/50">
                <Bot size={24} className="text-white" />
             </div>
             <div>
-              <h2 className="font-bold text-slate-900 dark:text-white leading-tight">SmartTerminal Cortex</h2>
+              <h2 className="font-bold text-zinc-900 dark:text-white leading-tight">SmartTerminal Cortex</h2>
               <div className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
-                <span className="text-xs text-slate-500 dark:text-slate-400">Системы в норме</span>
+                <span className="text-xs text-zinc-500 dark:text-zinc-400">Системы в норме</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-slate-50 dark:bg-slate-900/50" ref={scrollRef}>
+        <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-zinc-50 dark:bg-zinc-950/50" ref={scrollRef}>
           {history.map((msg) => (
             <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               <div className={`flex gap-4 max-w-[85%] md:max-w-[70%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1 shadow-md ${
-                  msg.role === 'user' ? 'bg-slate-200 dark:bg-slate-700' : 'bg-purple-100 dark:bg-purple-900/50 border border-purple-200 dark:border-purple-500/30'
+                  msg.role === 'user' ? 'bg-zinc-200 dark:bg-zinc-700' : 'bg-purple-100 dark:bg-purple-900/50 border border-purple-200 dark:border-purple-500/30'
                 }`}>
-                  {msg.role === 'user' ? <User size={16} className="text-slate-600 dark:text-slate-300" /> : <Sparkles size={16} className="text-purple-600 dark:text-purple-400" />}
+                  {msg.role === 'user' ? <User size={16} className="text-zinc-600 dark:text-zinc-300" /> : <Sparkles size={16} className="text-purple-600 dark:text-purple-400" />}
                 </div>
                 
                 <div className={`p-4 rounded-2xl shadow-sm ${
                   msg.role === 'user' 
                     ? 'bg-blue-600 text-white rounded-tr-sm' 
-                    : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 rounded-tl-sm'
+                    : 'bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 rounded-tl-sm'
                 }`}>
                   <p className="whitespace-pre-wrap leading-relaxed text-sm">{msg.text}</p>
-                  <p className={`text-[10px] mt-2 opacity-60 font-mono ${msg.role === 'user' ? 'text-blue-100' : 'text-slate-500'}`}>
+                  <p className={`text-[10px] mt-2 opacity-60 font-mono ${msg.role === 'user' ? 'text-blue-100' : 'text-zinc-500'}`}>
                     {msg.timestamp.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                   </p>
                 </div>
@@ -137,11 +137,11 @@ const AIConsultant: React.FC<Props> = ({ containers, zones, alerts }) => {
                  <div className="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900/50 border border-purple-200 dark:border-purple-500/30 flex items-center justify-center mt-1">
                    <Loader2 size={16} className="text-purple-600 dark:text-purple-400 animate-spin" />
                  </div>
-                 <div className="p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl rounded-tl-sm shadow-sm">
+                 <div className="p-4 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-2xl rounded-tl-sm shadow-sm">
                    <div className="flex gap-1 h-5 items-center">
-                     <span className="w-1.5 h-1.5 bg-slate-400 dark:bg-slate-500 rounded-full animate-bounce" style={{animationDelay: '0ms'}}></span>
-                     <span className="w-1.5 h-1.5 bg-slate-400 dark:bg-slate-500 rounded-full animate-bounce" style={{animationDelay: '150ms'}}></span>
-                     <span className="w-1.5 h-1.5 bg-slate-400 dark:bg-slate-500 rounded-full animate-bounce" style={{animationDelay: '300ms'}}></span>
+                     <span className="w-1.5 h-1.5 bg-zinc-400 dark:bg-zinc-500 rounded-full animate-bounce" style={{animationDelay: '0ms'}}></span>
+                     <span className="w-1.5 h-1.5 bg-zinc-400 dark:bg-zinc-500 rounded-full animate-bounce" style={{animationDelay: '150ms'}}></span>
+                     <span className="w-1.5 h-1.5 bg-zinc-400 dark:bg-zinc-500 rounded-full animate-bounce" style={{animationDelay: '300ms'}}></span>
                    </div>
                  </div>
                </div>
@@ -149,14 +149,14 @@ const AIConsultant: React.FC<Props> = ({ containers, zones, alerts }) => {
           )}
         </div>
 
-        <div className="p-4 bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+        <div className="p-4 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800">
           <div className="relative">
             <textarea
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Введите команду или запрос..."
-              className="w-full bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-200 rounded-xl border border-slate-300 dark:border-slate-700 p-4 pr-12 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 transition-all resize-none h-14 placeholder-slate-400"
+              className="w-full bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-200 rounded-xl border border-zinc-300 dark:border-zinc-700 p-4 pr-12 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 transition-all resize-none h-14 placeholder-zinc-400"
             />
             <button 
               onClick={handleSend}
@@ -171,8 +171,8 @@ const AIConsultant: React.FC<Props> = ({ containers, zones, alerts }) => {
 
       {/* Suggested Actions / Context Panel */}
       <div className="hidden lg:block w-80 space-y-4">
-         <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl p-5 shadow-sm">
-            <h3 className="font-semibold text-slate-900 dark:text-white mb-3 text-sm uppercase tracking-wider">Оперативные сценарии</h3>
+         <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-5 shadow-sm">
+            <h3 className="font-semibold text-zinc-900 dark:text-white mb-3 text-sm uppercase tracking-wider">Оперативные сценарии</h3>
             <div className="space-y-2">
               <ActionButton onClick={() => setQuery("Где находится поезд KZT-8821 и какой у него статус?")} label="Статус поезда KZT-8821" />
               <ActionButton onClick={() => setQuery("Есть ли пробки на КПП прямо сейчас?")} label="Анализ загрузки КПП" />
@@ -207,7 +207,7 @@ const AIConsultant: React.FC<Props> = ({ containers, zones, alerts }) => {
 };
 
 const ActionButton = ({ onClick, label }: any) => (
-  <button onClick={onClick} className="w-full text-left p-3 text-xs bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg hover:border-blue-500/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300">
+  <button onClick={onClick} className="w-full text-left p-3 text-xs bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg hover:border-blue-500/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-300">
     {label}
   </button>
 );

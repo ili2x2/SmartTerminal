@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Container, ContainerType, ContainerStatus } from '../types';
 import { 
@@ -206,21 +207,21 @@ const ContainerList: React.FC<Props> = ({ containers: initialContainers }) => {
       {/* Header Controls */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div className="flex items-center gap-3">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Реестр контейнеров</h2>
-            <button onClick={resetData} className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors" title="Сбросить изменения">
+            <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">Реестр контейнеров</h2>
+            <button onClick={resetData} className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-colors" title="Сбросить изменения">
                 <RotateCcw size={16} />
             </button>
         </div>
         
         <div className="flex flex-wrap gap-3">
           <div className="relative group">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500" size={16} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-zinc-500" size={16} />
             <input 
               type="text" 
               placeholder="Поиск по ID, Владельцу..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg pl-10 pr-4 py-2 text-sm focus:outline-none focus:border-blue-500 min-w-[200px] transition-all text-slate-900 dark:text-slate-200 placeholder-slate-400"
+              className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg pl-10 pr-4 py-2 text-sm focus:outline-none focus:border-blue-500 min-w-[200px] transition-all text-zinc-900 dark:text-zinc-200 placeholder-zinc-400"
             />
           </div>
           
@@ -228,12 +229,12 @@ const ContainerList: React.FC<Props> = ({ containers: initialContainers }) => {
              <select 
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
-              className="appearance-none bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg pl-4 pr-10 py-2 text-sm focus:outline-none focus:border-blue-500 cursor-pointer text-slate-700 dark:text-slate-300"
+              className="appearance-none bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg pl-4 pr-10 py-2 text-sm focus:outline-none focus:border-blue-500 cursor-pointer text-zinc-700 dark:text-zinc-300"
              >
                <option value="ALL">Все типы</option>
                {Object.values(ContainerType).map(t => <option key={t} value={t}>{t}</option>)}
              </select>
-             <Filter className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 pointer-events-none" size={14} />
+             <Filter className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-zinc-500 pointer-events-none" size={14} />
           </div>
 
           <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium rounded-lg transition-colors shadow-sm">
@@ -244,11 +245,11 @@ const ContainerList: React.FC<Props> = ({ containers: initialContainers }) => {
       </div>
 
       {/* Table */}
-      <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm min-h-[400px]">
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-sm min-h-[400px]">
         <div className="overflow-x-auto overflow-y-visible">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 text-xs uppercase text-slate-500 dark:text-slate-400 font-semibold tracking-wider">
+              <tr className="bg-zinc-50 dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 text-xs uppercase text-zinc-500 dark:text-zinc-400 font-semibold tracking-wider">
                 <th className="px-6 py-4">ID Контейнера</th>
                 <th className="px-6 py-4">Тип</th>
                 <th className="px-6 py-4">Статус</th>
@@ -258,20 +259,20 @@ const ContainerList: React.FC<Props> = ({ containers: initialContainers }) => {
                 <th className="px-6 py-4 text-right">Действия</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+            <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
               {filteredContainers.length > 0 ? filteredContainers.map(container => (
-                <tr key={container.id} className="hover:bg-slate-50 dark:hover:bg-slate-900/50 transition-colors group relative">
+                <tr key={container.id} className="hover:bg-zinc-50 dark:hover:bg-zinc-950/50 transition-colors group relative">
                   <td className="px-6 py-4">
                     <div className="flex flex-col">
-                      <span className="text-sm font-medium text-slate-900 dark:text-white">{container.code}</span>
-                      <span className="text-xs text-slate-500">{container.size}ft • {container.weight.toLocaleString()}kg</span>
+                      <span className="text-sm font-medium text-zinc-900 dark:text-white">{container.code}</span>
+                      <span className="text-xs text-zinc-500">{container.size}ft • {container.weight.toLocaleString()}kg</span>
                     </div>
                   </td>
                   <td className="px-6 py-4">
                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${
                       container.type === ContainerType.REEFER ? 'bg-emerald-100 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/20' : 
                       container.type === ContainerType.TANK ? 'bg-amber-100 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-500/20' : 
-                      'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700'
+                      'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700'
                     }`}>
                       {container.type}
                       {container.type === ContainerType.REEFER && container.temperature && (
@@ -283,62 +284,62 @@ const ContainerList: React.FC<Props> = ({ containers: initialContainers }) => {
                     <div className="flex items-center gap-2">
                        <span className={`w-2 h-2 rounded-full ${
                           container.status === ContainerStatus.IN_YARD ? 'bg-blue-500' :
-                          container.status === ContainerStatus.MAINTENANCE ? 'bg-red-500 animate-pulse' : 'bg-slate-500'
+                          container.status === ContainerStatus.MAINTENANCE ? 'bg-red-500 animate-pulse' : 'bg-zinc-500'
                        }`}></span>
-                       <span className={`text-sm ${container.status === ContainerStatus.MAINTENANCE ? 'text-red-500 dark:text-red-400 font-bold' : 'text-slate-600 dark:text-slate-300'}`}>
+                       <span className={`text-sm ${container.status === ContainerStatus.MAINTENANCE ? 'text-red-500 dark:text-red-400 font-bold' : 'text-zinc-600 dark:text-zinc-300'}`}>
                          {statusMap[container.status] || container.status}
                        </span>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="font-mono text-sm text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-900 px-2 py-1 rounded border border-slate-200 dark:border-slate-800">
+                    <span className="font-mono text-sm text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-950 px-2 py-1 rounded border border-zinc-200 dark:border-zinc-800">
                       {container.location.zone}-{container.location.row}-{container.location.tier}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-sm text-slate-700 dark:text-slate-300">
+                  <td className="px-6 py-4 text-sm text-zinc-700 dark:text-zinc-300">
                     {container.owner}
                   </td>
-                  <td className="px-6 py-4 text-sm text-slate-500 dark:text-slate-400">
+                  <td className="px-6 py-4 text-sm text-zinc-500 dark:text-zinc-400">
                     {container.contentCategory}
                   </td>
                   <td className="px-6 py-4 text-right relative">
                     <button 
                       onClick={(e) => toggleMenu(container.id, e)}
-                      className={`p-1.5 rounded transition-colors ${activeMenuId === container.id ? 'bg-blue-600 text-white' : 'text-slate-500 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'}`}
+                      className={`p-1.5 rounded transition-colors ${activeMenuId === container.id ? 'bg-blue-600 text-white' : 'text-zinc-500 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800'}`}
                     >
                       <MoreHorizontal size={18} />
                     </button>
 
                     {/* Dropdown Menu */}
                     {activeMenuId === container.id && (
-                      <div ref={menuRef} className="absolute right-8 top-8 w-48 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                      <div ref={menuRef} className="absolute right-8 top-8 w-48 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-lg shadow-xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
                         <div className="py-1">
                           <button 
                              onClick={(e) => handleAction('VIEW', container.id, e)}
-                             className="w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white flex items-center gap-2"
+                             className="w-full text-left px-4 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-white flex items-center gap-2"
                           >
                             <Eye size={14} /> Карточка
                           </button>
-                          <div className="border-t border-slate-200 dark:border-slate-800 my-1"></div>
+                          <div className="border-t border-zinc-200 dark:border-zinc-800 my-1"></div>
                           <button 
                              onClick={(e) => handleAction('MOVE', container.id, e)}
-                             className="w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-600/20 hover:text-blue-600 dark:hover:text-blue-300 flex items-center gap-2"
+                             className="w-full text-left px-4 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-blue-50 dark:hover:bg-blue-600/20 hover:text-blue-600 dark:hover:text-blue-300 flex items-center gap-2"
                           >
                             <ArrowRightLeft size={14} /> Переместить
                           </button>
                           <button 
                              onClick={(e) => handleAction('EDIT', container.id, e)}
-                             className="w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white flex items-center gap-2"
+                             className="w-full text-left px-4 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-white flex items-center gap-2"
                           >
                             <Edit size={14} /> Редактировать
                           </button>
                           <button 
                              onClick={(e) => handleAction('HISTORY', container.id, e)}
-                             className="w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white flex items-center gap-2"
+                             className="w-full text-left px-4 py-2 text-sm text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-white flex items-center gap-2"
                           >
                             <History size={14} /> История
                           </button>
-                          <div className="border-t border-slate-200 dark:border-slate-800 my-1"></div>
+                          <div className="border-t border-zinc-200 dark:border-zinc-800 my-1"></div>
                           <button 
                              onClick={(e) => handleAction('BLOCK', container.id, e)}
                              className="w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 hover:text-red-700 dark:hover:text-red-300 flex items-center gap-2"
@@ -352,7 +353,7 @@ const ContainerList: React.FC<Props> = ({ containers: initialContainers }) => {
                 </tr>
               )) : (
                 <tr>
-                  <td colSpan={7} className="px-6 py-12 text-center text-slate-500">
+                  <td colSpan={7} className="px-6 py-12 text-center text-zinc-500">
                     Контейнеры не найдены.
                   </td>
                 </tr>
@@ -360,11 +361,11 @@ const ContainerList: React.FC<Props> = ({ containers: initialContainers }) => {
             </tbody>
           </table>
         </div>
-        <div className="bg-slate-50 dark:bg-slate-900 px-6 py-3 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center text-xs text-slate-500 dark:text-slate-400">
+        <div className="bg-zinc-50 dark:bg-zinc-950 px-6 py-3 border-t border-zinc-200 dark:border-zinc-800 flex justify-between items-center text-xs text-zinc-500 dark:text-zinc-400">
            <span>Показано {filteredContainers.length} из {containers.length} записей</span>
            <div className="flex gap-1">
-             <button className="px-3 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800 disabled:opacity-50" disabled>Пред.</button>
-             <button className="px-3 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800">След.</button>
+             <button className="px-3 py-1 rounded hover:bg-zinc-200 dark:hover:bg-zinc-800 disabled:opacity-50" disabled>Пред.</button>
+             <button className="px-3 py-1 rounded hover:bg-zinc-200 dark:hover:bg-zinc-800">След.</button>
            </div>
         </div>
       </div>
@@ -372,10 +373,10 @@ const ContainerList: React.FC<Props> = ({ containers: initialContainers }) => {
       {/* --- MODALS --- */}
       {activeModal && selectedContainer && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 dark:bg-black/70 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-           <div className="bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl shadow-2xl w-full max-w-lg overflow-hidden animate-in zoom-in-95 duration-200">
+           <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-2xl w-full max-w-lg overflow-hidden animate-in zoom-in-95 duration-200">
               
               {/* Modal Header */}
-              <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-slate-50 dark:bg-slate-900">
+              <div className="px-6 py-4 border-b border-zinc-200 dark:border-zinc-800 flex justify-between items-center bg-zinc-50 dark:bg-zinc-950">
                 <div className="flex items-center gap-3">
                    <div className="p-2 bg-blue-100 dark:bg-blue-600/20 rounded-lg text-blue-600 dark:text-blue-400">
                       {activeModal === 'VIEW' && <Eye size={20}/>}
@@ -385,17 +386,17 @@ const ContainerList: React.FC<Props> = ({ containers: initialContainers }) => {
                       {activeModal === 'BLOCK' && <AlertTriangle size={20} className="text-red-500 dark:text-red-400"/>}
                    </div>
                    <div>
-                     <h3 className="font-bold text-slate-900 dark:text-white text-lg">
+                     <h3 className="font-bold text-zinc-900 dark:text-white text-lg">
                         {activeModal === 'VIEW' && 'Карточка контейнера'}
                         {activeModal === 'MOVE' && 'Перемещение'}
                         {activeModal === 'EDIT' && 'Редактирование данных'}
                         {activeModal === 'HISTORY' && 'История событий'}
                         {activeModal === 'BLOCK' && 'Блокировка / Удержание'}
                      </h3>
-                     <p className="text-xs text-slate-500 dark:text-slate-400 font-mono">{selectedContainer.code}</p>
+                     <p className="text-xs text-zinc-500 dark:text-zinc-400 font-mono">{selectedContainer.code}</p>
                    </div>
                 </div>
-                <button onClick={closeModal} className="text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors"><X size={24}/></button>
+                <button onClick={closeModal} className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"><X size={24}/></button>
               </div>
 
               {/* Modal Body */}
@@ -405,46 +406,46 @@ const ContainerList: React.FC<Props> = ({ containers: initialContainers }) => {
                  {activeModal === 'VIEW' && (
                     <div className="space-y-4">
                        <div className="grid grid-cols-2 gap-4">
-                          <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800">
-                             <p className="text-xs text-slate-500 uppercase">Владелец</p>
-                             <p className="font-medium text-slate-900 dark:text-white">{selectedContainer.owner}</p>
+                          <div className="p-3 bg-zinc-50 dark:bg-zinc-950 rounded border border-zinc-200 dark:border-zinc-800">
+                             <p className="text-xs text-zinc-500 uppercase">Владелец</p>
+                             <p className="font-medium text-zinc-900 dark:text-white">{selectedContainer.owner}</p>
                           </div>
-                          <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800">
-                             <p className="text-xs text-slate-500 uppercase">Тип / Размер</p>
-                             <p className="font-medium text-slate-900 dark:text-white">{selectedContainer.type} {selectedContainer.size}'</p>
+                          <div className="p-3 bg-zinc-50 dark:bg-zinc-950 rounded border border-zinc-200 dark:border-zinc-800">
+                             <p className="text-xs text-zinc-500 uppercase">Тип / Размер</p>
+                             <p className="font-medium text-zinc-900 dark:text-white">{selectedContainer.type} {selectedContainer.size}'</p>
                           </div>
-                          <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800">
-                             <p className="text-xs text-slate-500 uppercase">Вес (Брутто)</p>
-                             <p className="font-medium text-slate-900 dark:text-white">{selectedContainer.weight.toLocaleString()} кг</p>
+                          <div className="p-3 bg-zinc-50 dark:bg-zinc-950 rounded border border-zinc-200 dark:border-zinc-800">
+                             <p className="text-xs text-zinc-500 uppercase">Вес (Брутто)</p>
+                             <p className="font-medium text-zinc-900 dark:text-white">{selectedContainer.weight.toLocaleString()} кг</p>
                           </div>
-                          <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800">
-                             <p className="text-xs text-slate-500 uppercase">Категория груза</p>
-                             <p className="font-medium text-slate-900 dark:text-white">{selectedContainer.contentCategory}</p>
+                          <div className="p-3 bg-zinc-50 dark:bg-zinc-950 rounded border border-zinc-200 dark:border-zinc-800">
+                             <p className="text-xs text-zinc-500 uppercase">Категория груза</p>
+                             <p className="font-medium text-zinc-900 dark:text-white">{selectedContainer.contentCategory}</p>
                           </div>
                        </div>
                        
-                       <div className="mt-4 border-t border-slate-200 dark:border-slate-800 pt-4">
+                       <div className="mt-4 border-t border-zinc-200 dark:border-zinc-800 pt-4">
                           <div className="flex items-center gap-2 mb-2">
                              <MapPin size={16} className="text-blue-500"/>
-                             <span className="text-sm font-bold text-slate-700 dark:text-slate-300">Текущая локация</span>
+                             <span className="text-sm font-bold text-zinc-700 dark:text-zinc-300">Текущая локация</span>
                           </div>
                           <div className="flex gap-2">
                              <div className="flex-1 text-center bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-500/30 p-2 rounded">
                                 <span className="block text-xs text-blue-600 dark:text-blue-300">Зона</span>
-                                <span className="font-mono font-bold text-slate-900 dark:text-white text-lg">{selectedContainer.location.zone}</span>
+                                <span className="font-mono font-bold text-zinc-900 dark:text-white text-lg">{selectedContainer.location.zone}</span>
                              </div>
-                             <div className="flex-1 text-center bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-2 rounded">
-                                <span className="block text-xs text-slate-500">Ряд</span>
-                                <span className="font-mono font-bold text-slate-900 dark:text-white text-lg">{selectedContainer.location.row}</span>
+                             <div className="flex-1 text-center bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-2 rounded">
+                                <span className="block text-xs text-zinc-500">Ряд</span>
+                                <span className="font-mono font-bold text-zinc-900 dark:text-white text-lg">{selectedContainer.location.row}</span>
                              </div>
-                             <div className="flex-1 text-center bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-2 rounded">
-                                <span className="block text-xs text-slate-500">Ярус</span>
-                                <span className="font-mono font-bold text-slate-900 dark:text-white text-lg">{selectedContainer.location.tier}</span>
+                             <div className="flex-1 text-center bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-2 rounded">
+                                <span className="block text-xs text-zinc-500">Ярус</span>
+                                <span className="font-mono font-bold text-zinc-900 dark:text-white text-lg">{selectedContainer.location.tier}</span>
                              </div>
                           </div>
                        </div>
                        
-                       <div className="flex items-center gap-2 text-xs text-slate-500 mt-2">
+                       <div className="flex items-center gap-2 text-xs text-zinc-500 mt-2">
                           <Calendar size={14}/> Дата прибытия: {new Date(selectedContainer.arrivalDate).toLocaleString('ru-RU')}
                        </div>
                     </div>
@@ -453,10 +454,10 @@ const ContainerList: React.FC<Props> = ({ containers: initialContainers }) => {
                  {/* 2. MOVE MODAL */}
                  {activeModal === 'MOVE' && (
                     <div className="space-y-4">
-                       <p className="text-sm text-slate-600 dark:text-slate-400">Выберите новую позицию для перемещения контейнера. Система создаст задачу для крана.</p>
+                       <p className="text-sm text-zinc-600 dark:text-zinc-400">Выберите новую позицию для перемещения контейнера. Система создаст задачу для крана.</p>
                        
                        <div>
-                          <label className="text-xs text-slate-500 font-bold uppercase mb-1 block">Целевая зона</label>
+                          <label className="text-xs text-zinc-500 font-bold uppercase mb-1 block">Целевая зона</label>
                           <div className="grid grid-cols-4 gap-2">
                              {['A', 'B', 'C', 'D'].map(zone => (
                                 <button 
@@ -465,7 +466,7 @@ const ContainerList: React.FC<Props> = ({ containers: initialContainers }) => {
                                    className={`py-2 rounded border font-bold transition-all ${
                                       formData.zone === zone 
                                       ? 'bg-blue-600 border-blue-500 text-white' 
-                                      : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-slate-400 dark:hover:border-slate-500'
+                                      : 'bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-zinc-400 dark:hover:border-zinc-500'
                                    }`}
                                 >
                                    {zone}
@@ -476,24 +477,24 @@ const ContainerList: React.FC<Props> = ({ containers: initialContainers }) => {
 
                        <div className="grid grid-cols-2 gap-4">
                           <div>
-                             <label className="text-xs text-slate-500 font-bold uppercase mb-1 block">Ряд (01-99)</label>
+                             <label className="text-xs text-zinc-500 font-bold uppercase mb-1 block">Ряд (01-99)</label>
                              <input 
                                type="text" 
                                value={formData.row} 
                                onChange={(e) => setFormData({...formData, row: e.target.value})}
-                               className={`w-full bg-white dark:bg-slate-900 border rounded p-2 text-slate-900 dark:text-white focus:border-blue-500 outline-none font-mono ${formErrors.row ? 'border-red-500' : 'border-slate-200 dark:border-slate-700'}`}
+                               className={`w-full bg-white dark:bg-zinc-950 border rounded p-2 text-zinc-900 dark:text-white focus:border-blue-500 outline-none font-mono ${formErrors.row ? 'border-red-500' : 'border-zinc-200 dark:border-zinc-700'}`}
                                placeholder="01"
                              />
                              {formErrors.row && <p className="text-xs text-red-500 mt-1">{formErrors.row}</p>}
                           </div>
                           <div>
-                             <label className="text-xs text-slate-500 font-bold uppercase mb-1 block">Ярус (1-5)</label>
+                             <label className="text-xs text-zinc-500 font-bold uppercase mb-1 block">Ярус (1-5)</label>
                              <input 
                                type="number" 
                                max={5} min={1}
                                value={formData.tier} 
                                onChange={(e) => setFormData({...formData, tier: e.target.value})}
-                               className={`w-full bg-white dark:bg-slate-900 border rounded p-2 text-slate-900 dark:text-white focus:border-blue-500 outline-none font-mono ${formErrors.tier ? 'border-red-500' : 'border-slate-200 dark:border-slate-700'}`}
+                               className={`w-full bg-white dark:bg-zinc-950 border rounded p-2 text-zinc-900 dark:text-white focus:border-blue-500 outline-none font-mono ${formErrors.tier ? 'border-red-500' : 'border-zinc-200 dark:border-zinc-700'}`}
                              />
                              {formErrors.tier && <p className="text-xs text-red-500 mt-1">{formErrors.tier}</p>}
                           </div>
@@ -505,31 +506,31 @@ const ContainerList: React.FC<Props> = ({ containers: initialContainers }) => {
                  {activeModal === 'EDIT' && (
                     <div className="space-y-4">
                        <div>
-                          <label className="text-xs text-slate-500 font-bold uppercase mb-1 block">Владелец (Линия)</label>
+                          <label className="text-xs text-zinc-500 font-bold uppercase mb-1 block">Владелец (Линия)</label>
                           <input 
                              type="text" 
                              value={formData.owner}
                              onChange={(e) => setFormData({...formData, owner: e.target.value})}
-                             className={`w-full bg-white dark:bg-slate-900 border rounded p-2 text-slate-900 dark:text-white focus:border-blue-500 outline-none ${formErrors.owner ? 'border-red-500' : 'border-slate-200 dark:border-slate-700'}`}
+                             className={`w-full bg-white dark:bg-zinc-950 border rounded p-2 text-zinc-900 dark:text-white focus:border-blue-500 outline-none ${formErrors.owner ? 'border-red-500' : 'border-zinc-200 dark:border-zinc-700'}`}
                           />
                           {formErrors.owner && <p className="text-xs text-red-500 mt-1">{formErrors.owner}</p>}
                        </div>
                        <div>
-                          <label className="text-xs text-slate-500 font-bold uppercase mb-1 block">Категория груза</label>
+                          <label className="text-xs text-zinc-500 font-bold uppercase mb-1 block">Категория груза</label>
                           <input 
                              type="text" 
                              value={formData.content}
                              onChange={(e) => setFormData({...formData, content: e.target.value})}
-                             className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded p-2 text-slate-900 dark:text-white focus:border-blue-500 outline-none"
+                             className="w-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-700 rounded p-2 text-zinc-900 dark:text-white focus:border-blue-500 outline-none"
                           />
                        </div>
                        <div>
-                          <label className="text-xs text-slate-500 font-bold uppercase mb-1 block">Вес (кг)</label>
+                          <label className="text-xs text-zinc-500 font-bold uppercase mb-1 block">Вес (кг)</label>
                           <input 
                              type="number" 
                              value={formData.weight}
                              onChange={(e) => setFormData({...formData, weight: e.target.value})}
-                             className={`w-full bg-white dark:bg-slate-900 border rounded p-2 text-slate-900 dark:text-white focus:border-blue-500 outline-none ${formErrors.weight ? 'border-red-500' : 'border-slate-200 dark:border-slate-700'}`}
+                             className={`w-full bg-white dark:bg-zinc-950 border rounded p-2 text-zinc-900 dark:text-white focus:border-blue-500 outline-none ${formErrors.weight ? 'border-red-500' : 'border-zinc-200 dark:border-zinc-700'}`}
                           />
                           {formErrors.weight && <p className="text-xs text-red-500 mt-1">{formErrors.weight}</p>}
                        </div>
@@ -538,16 +539,16 @@ const ContainerList: React.FC<Props> = ({ containers: initialContainers }) => {
 
                  {/* 4. HISTORY MODAL */}
                  {activeModal === 'HISTORY' && (
-                    <div className="relative border-l border-slate-200 dark:border-slate-800 ml-3 space-y-6">
+                    <div className="relative border-l border-zinc-200 dark:border-zinc-800 ml-3 space-y-6">
                        {getMockHistory(selectedContainer).map((item, idx) => (
                           <div key={idx} className="relative pl-6">
-                             <div className="absolute -left-3 top-0 w-6 h-6 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400">
+                             <div className="absolute -left-3 top-0 w-6 h-6 rounded-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-zinc-400">
                                 {item.icon}
                              </div>
                              <div>
-                                <p className="text-sm font-bold text-slate-800 dark:text-slate-200">{item.event}</p>
+                                <p className="text-sm font-bold text-zinc-800 dark:text-zinc-200">{item.event}</p>
                                 <div className="flex justify-between items-center mt-1">
-                                   <span className="text-xs text-slate-500">{item.date}</span>
+                                   <span className="text-xs text-zinc-500">{item.date}</span>
                                    <span className="text-xs text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/10 px-1.5 rounded">{item.user}</span>
                                 </div>
                              </div>
@@ -567,30 +568,30 @@ const ContainerList: React.FC<Props> = ({ containers: initialContainers }) => {
                        </div>
                        
                        <div>
-                          <label className="text-xs text-slate-500 font-bold uppercase mb-2 block">Причина удержания</label>
+                          <label className="text-xs text-zinc-500 font-bold uppercase mb-2 block">Причина удержания</label>
                           <div className="space-y-2">
                              {['Таможенный досмотр', 'Повреждение / Ремонт', 'Задолженность клиента', 'Санитарный контроль'].map(reason => (
-                                <label key={reason} className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-900 rounded border border-slate-200 dark:border-slate-800 cursor-pointer hover:border-red-500/50">
+                                <label key={reason} className="flex items-center gap-3 p-3 bg-zinc-50 dark:bg-zinc-950 rounded border border-zinc-200 dark:border-zinc-800 cursor-pointer hover:border-red-500/50">
                                    <input 
                                       type="radio" 
                                       name="blockReason"
                                       checked={formData.reason === reason}
                                       onChange={() => setFormData({...formData, reason})}
-                                      className="text-red-500 focus:ring-red-500 bg-white dark:bg-slate-950 border-slate-300 dark:border-slate-700"
+                                      className="text-red-500 focus:ring-red-500 bg-white dark:bg-zinc-950 border-zinc-300 dark:border-zinc-700"
                                    />
-                                   <span className="text-sm text-slate-700 dark:text-slate-300">{reason}</span>
+                                   <span className="text-sm text-zinc-700 dark:text-zinc-300">{reason}</span>
                                 </label>
                              ))}
                           </div>
                        </div>
                        
                        <div>
-                          <label className="text-xs text-slate-500 font-bold uppercase mb-1 block">Примечание</label>
+                          <label className="text-xs text-zinc-500 font-bold uppercase mb-1 block">Примечание</label>
                           <textarea 
                              value={formData.notes || ''}
                              onChange={(e) => setFormData({...formData, notes: e.target.value})}
                              placeholder="Введите дополнительную информацию..."
-                             className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded p-2 text-slate-900 dark:text-white focus:border-red-500 outline-none text-sm h-20 resize-none"
+                             className="w-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-700 rounded p-2 text-zinc-900 dark:text-white focus:border-red-500 outline-none text-sm h-20 resize-none"
                           />
                        </div>
                     </div>
@@ -599,10 +600,10 @@ const ContainerList: React.FC<Props> = ({ containers: initialContainers }) => {
               </div>
 
               {/* Modal Footer */}
-              <div className="p-4 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 flex justify-end gap-3">
+              <div className="p-4 bg-zinc-50 dark:bg-zinc-950 border-t border-zinc-200 dark:border-zinc-800 flex justify-end gap-3">
                  <button 
                     onClick={closeModal}
-                    className="px-4 py-2 rounded text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
+                    className="px-4 py-2 rounded text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors"
                  >
                     Отмена
                  </button>
@@ -623,7 +624,7 @@ const ContainerList: React.FC<Props> = ({ containers: initialContainers }) => {
                     </button>
                  )}
                  {(activeModal === 'VIEW' || activeModal === 'HISTORY') && (
-                    <button onClick={closeModal} className="px-4 py-2 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-900 dark:text-white rounded text-sm font-medium">
+                    <button onClick={closeModal} className="px-4 py-2 bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white rounded text-sm font-medium">
                        Закрыть
                     </button>
                  )}
